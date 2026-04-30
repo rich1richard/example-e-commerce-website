@@ -52,4 +52,78 @@ test.describe('Authentication', () => {
 
     await expect(page.getByText('Invalid email or password')).toBeVisible();
   });
+
+  test.describe('Registration — required fields', () => {
+    test.beforeEach(async ({ page }) => {
+      await page.goto('/register');
+    });
+
+    test('shows error when name is left empty', async ({ page }) => {
+      await page.getByTestId('register-name').click();
+      await page.getByTestId('register-name').press('Tab');
+
+      await expect(page.getByTestId('register-name-error')).toBeVisible();
+      await expect(page.getByTestId('register-name-error')).toHaveText('Name is required');
+    });
+
+    test('shows error when email is left empty', async ({ page }) => {
+      await page.getByTestId('register-email').click();
+      await page.getByTestId('register-email').press('Tab');
+
+      await expect(page.getByTestId('register-email-error')).toBeVisible();
+      await expect(page.getByTestId('register-email-error')).toHaveText('Email is required');
+    });
+
+    test('shows error when password is left empty', async ({ page }) => {
+      await page.getByTestId('register-password').click();
+      await page.getByTestId('register-password').press('Tab');
+
+      await expect(page.getByTestId('register-password-error')).toBeVisible();
+      await expect(page.getByTestId('register-password-error')).toHaveText('Password is required');
+    });
+
+    test('shows error when confirm password is left empty', async ({ page }) => {
+      await page.getByTestId('register-confirm').click();
+      await page.getByTestId('register-confirm').press('Tab');
+
+      await expect(page.getByTestId('register-confirm-error')).toBeVisible();
+      await expect(page.getByTestId('register-confirm-error')).toHaveText('Please confirm your password');
+    });
+
+    test('shows summary error when form is submitted with all fields empty', async ({ page }) => {
+      await page.getByTestId('register-submit').click();
+
+      await expect(page.getByTestId('register-error')).toBeVisible();
+      await expect(page.getByTestId('register-error')).toHaveText('Please correct the errors above');
+    });
+  });
+
+  test.describe('Login — required fields', () => {
+    test.beforeEach(async ({ page }) => {
+      await page.goto('/login');
+    });
+
+    test('shows error when email is left empty', async ({ page }) => {
+      await page.getByTestId('login-email').click();
+      await page.getByTestId('login-email').press('Tab');
+
+      await expect(page.getByTestId('login-email-error')).toBeVisible();
+      await expect(page.getByTestId('login-email-error')).toHaveText('Email is required');
+    });
+
+    test('shows error when password is left empty', async ({ page }) => {
+      await page.getByTestId('login-password').click();
+      await page.getByTestId('login-password').press('Tab');
+
+      await expect(page.getByTestId('login-password-error')).toBeVisible();
+      await expect(page.getByTestId('login-password-error')).toHaveText('Password is required');
+    });
+
+    test('shows summary error when form is submitted with all fields empty', async ({ page }) => {
+      await page.getByTestId('login-submit').click();
+
+      await expect(page.getByTestId('login-error')).toBeVisible();
+      await expect(page.getByTestId('login-error')).toHaveText('Please correct the errors above');
+    });
+  });
 });

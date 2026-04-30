@@ -47,4 +47,116 @@ test.describe('Checkout', () => {
     const orderInHistory = page.getByText(orderNumber as string);
     await expect(orderInHistory).toBeVisible();
   });
+
+  test.describe('Shipping form — required fields', () => {
+    test('shows error when full name is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('ship-name').click();
+      await page.getByTestId('ship-name').press('Tab');
+
+      await expect(page.getByTestId('ship-name-error')).toBeVisible();
+      await expect(page.getByTestId('ship-name-error')).toHaveText('Full name is required');
+    });
+
+    test('shows error when address line 1 is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('ship-address1').click();
+      await page.getByTestId('ship-address1').press('Tab');
+
+      await expect(page.getByTestId('ship-address1-error')).toBeVisible();
+      await expect(page.getByTestId('ship-address1-error')).toHaveText('Address is required');
+    });
+
+    test('shows error when city is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('ship-city').click();
+      await page.getByTestId('ship-city').press('Tab');
+
+      await expect(page.getByTestId('ship-city-error')).toBeVisible();
+      await expect(page.getByTestId('ship-city-error')).toHaveText('City is required');
+    });
+
+    test('shows error when ZIP code is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('ship-zip').click();
+      await page.getByTestId('ship-zip').press('Tab');
+
+      await expect(page.getByTestId('ship-zip-error')).toBeVisible();
+      await expect(page.getByTestId('ship-zip-error')).toHaveText('ZIP / postal code is required');
+    });
+
+    test('shows error when country is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('ship-country').click();
+      await page.getByTestId('ship-country').press('Tab');
+
+      await expect(page.getByTestId('ship-country-error')).toBeVisible();
+      await expect(page.getByTestId('ship-country-error')).toHaveText('Country is required');
+    });
+  });
+
+  test.describe('Payment form — required fields', () => {
+    test('shows error when cardholder name is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('pay-name').click();
+      await page.getByTestId('pay-name').press('Tab');
+
+      await expect(page.getByTestId('pay-name-error')).toBeVisible();
+      await expect(page.getByTestId('pay-name-error')).toHaveText('Cardholder name is required');
+    });
+
+    test('shows error when card number is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('pay-number').click();
+      await page.getByTestId('pay-number').press('Tab');
+
+      await expect(page.getByTestId('pay-number-error')).toBeVisible();
+      await expect(page.getByTestId('pay-number-error')).toHaveText('Card number is required');
+    });
+
+    test('shows error when expiry is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('pay-expiry').click();
+      await page.getByTestId('pay-expiry').press('Tab');
+
+      await expect(page.getByTestId('pay-expiry-error')).toBeVisible();
+      await expect(page.getByTestId('pay-expiry-error')).toHaveText('Expiry is required');
+    });
+
+    test('shows error when CVC is left empty', async ({ page }) => {
+      await page.getByTestId('cart-button').click();
+      await page.getByTestId('cart-drawer-checkout').click();
+      await expect(page).toHaveURL(/\/checkout/);
+
+      await page.getByTestId('pay-cvc').click();
+      await page.getByTestId('pay-cvc').press('Tab');
+
+      await expect(page.getByTestId('pay-cvc-error')).toBeVisible();
+      await expect(page.getByTestId('pay-cvc-error')).toHaveText('CVC is required');
+    });
+  });
 });
