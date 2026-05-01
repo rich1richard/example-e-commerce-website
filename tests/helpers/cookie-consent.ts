@@ -19,7 +19,7 @@ export async function dismissCookieBanner(page: Page) {
     await acceptBtn.waitFor({ state: 'visible', timeout: 10000 });
     await acceptBtn.click();
   } catch (error) {
-    // If it doesn't appear within 5 seconds, it might be already dismissed or not present.
+    // If it doesn't appear within the delay, it might be already dismissed or not present.
     // We just ignore the error.
     console.log('Cookie banner not found or already dismissed.');
   }

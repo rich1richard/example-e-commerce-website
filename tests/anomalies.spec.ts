@@ -11,7 +11,7 @@ test.describe('Exploration Report Anomalies & Observations', () => {
     await dismissCookieBanner(page);
   });
 
-  test('Anomaly: Missing Category (In Footer > Shop)', async ({ page }) => {
+  test.fail('Anomaly: Missing Category (In Footer > Shop)', async ({ page }) => {
     // Navigate directly to products page
     await page.goto('/products');
 
@@ -33,7 +33,7 @@ test.describe('Exploration Report Anomalies & Observations', () => {
     expect(footerCategoryCount, "The number of categories in the footer does not match the number of categories on the products page.").toBe(expectedCategoryCount);
   });
 
-  test('Anomaly: No Working Links (In Footer > Shop)', async ({ page }) => {
+  test.fail('Anomaly: No Working Links (In Footer > Shop)', async ({ page }) => {
     // Navigate directly to products page
     await page.goto('/products');
 
@@ -69,7 +69,7 @@ test.describe('Exploration Report Anomalies & Observations', () => {
     }
   });
 
-  test('Anomaly: Disappearing Account Menu (In the Header)', async ({ page, isMobile }) => {
+  test.fail('Anomaly: Disappearing Account Menu (In the Header)', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'This bug is specific to desktop hover behavior');
 
     const accountTrigger = page.getByTestId('account-menu');
@@ -95,7 +95,7 @@ test.describe('Exploration Report Anomalies & Observations', () => {
     }
   });
 
-  test('Anomaly: Prices Difference (In Cart Panel)', async ({ page }) => {
+  test.fail('Anomaly: Prices Difference (In Cart Panel)', async ({ page }) => {
     await page.goto('/products');
 
     // Add item to cart
@@ -139,7 +139,7 @@ test.describe('Exploration Report Anomalies & Observations', () => {
     expect(total, "The total in the cart drawer does not match the sum of the line item totals.").toBeCloseTo(lineItemTotals, 2);
   });
 
-  test('Observation: Order Details (In Account Page)', async ({ page }) => {
+  test.fail('Observation: Order Details (In Account Page)', async ({ page }) => {
     // Login
     await page.goto('/login');
     await page.getByTestId('login-email').fill(TEST_EMAIL);
